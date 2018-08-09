@@ -1,0 +1,328 @@
+.no-list-style {list-style-type: none}
+html, body, header, main, progress {margin: 0; padding: 0; opacity: 1;}
+html, body, #root{width: 100%; height: 100%;}
+header {margin-left: 70%;}
+img {width: 350px; height: 300px;padding-top: 0; margin-top: 0; position: relative;display: block;
+}
+.float-left {float: left;}
+.float-right {float: right;}
+.card-position {
+  margin-bottom: 3%; margin-left: 0%; margin-right: 0%;
+}
+.topp {
+  position: absolute;
+  top: 0px; 
+}
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+.box-effects {
+  border-radius: 20px;
+}
+.borders {
+  border-width: 10px !important;
+  border-image: repeating-linear-gradient(45deg,rgb(231, 244, 181),rgb(231, 244, 181) 10px,rgb(170, 192, 80)10px,rgb(170, 192, 80) 20px) 20 !important;
+}
+.inline {display:inline;}
+progress {width: 100%;display: block;}
+#viewDiv {min-height: 350px; margin: 0 auto;}
+.background {
+      background: rgb(244, 249, 212); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, rgb(244, 249, 212), rgb(231, 244, 181)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, rgb(244, 249, 212), rgb(231, 244, 181)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, rgb(244, 249, 212), rgb(231, 244, 181)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, rgb(244, 249, 212), rgb(231, 244, 181)); /* Standard syntax */
+}
+.card-background {
+  background-image: url("./images/card-backgrounds/E7F4B5-0.5.png");
+  background-size: cover;
+}
+.vertical {
+  display: inline-block;
+  -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+  transform: rotate(-90deg);
+}
+.transparent {
+  background: rgb(244, 249, 212);
+  background: rgba(244, 249, 212, 0.9) !important;
+}
+.main-background {
+  background-image: url("./images/main-backgrounds/back5.png");
+  background-size: cover;
+}
+#wrapper {
+    margin: 0 auto; max-width: 900px; width:55%; height: 100%;
+}
+.font-size-16 {font-size: 16px;}
+#gameid {width: 100%;}
+#scoreBoard {font-size: 16px;}
+main {margin-left: 20%; margin-right: 20%;}
+#timer, #spScore {margin: 0;padding: 0; }
+.no-margin {margin: 0;padding: 0; }
+#quiz {display: inline-block; }
+#viewDiv {overflow: hidden;}
+label {font-size: 16px}
+.score-board {background:rgba(73, 68, 68, 0.6); color:rgb(255, 255, 255) ; padding:2px; border-radius: 5px;}
+
+.StandardButton
+{
+	transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    position: relative;
+	padding: 5px 10px;
+  margin: 0px 5px 5px 0px;
+	border-radius: 4px;
+	font-family: 'Pacifico', cursive;
+	font-size: 26px;
+	color: #FFF;
+    text-decoration: none;
+    background-color: #82BF56;
+	border-bottom: 5px solid #669644;
+    text-shadow: 0px -2px #669644;	
+    transform: translate(0px,5px);
+    -webkit-transform: translate(0px,5px);
+      border-bottom: 1px solid;
+}
+.pressedButton
+{
+  background-color: #d0e6ce;
+	border-bottom: 5px solid #d0e6ce;
+  text-shadow: 0px -2px #d0e6ce;	
+}
+.slideInFromLeft {
+  animation: 0.2s ease-out 0s 1 slideInFromLeft;
+}
+.slideInFromRight {
+  animation: 0.2s ease-out 0s 1 slideInFromRight;
+}
+.slideInFromTop {
+  animation: 0.2s ease-out 0s 1 slideInFromTop;
+}
+.slideInFromBottom {
+  animation: 0.2s ease-out 0s 1 slideInFromBottom;
+}
+@keyframes slideInFromLeft {
+  0% {
+      transform: translateX(-100%);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+@keyframes slideInFromTop {
+  0% {
+      transform: translateY(-100%);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+@keyframes slideInFromBottom {
+  0% {
+      transform: translateY(100%);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+#viewDiv {height: 225px;}
+#timer {height: 25px;}
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+label {
+  background: rgb(231, 245, 140);
+  padding: 2px 2px;
+  margin-left: 3px;
+  border-radius: 5px;
+  width: 45%;
+  height: 100%;
+}
+label:hover {
+  background: #82BF56;
+}
+input[type=radio]:checked + label {
+	color: white;
+	background: #82BF56;
+}
+.width-100 {
+  width: 100%;
+}
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+
+.option-input:checked::before {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  content: none;
+  display: inline-block;
+  font-size: 16px;
+  text-align: center;
+  line-height: 14px;
+  color: #FFF;
+}
+.option-input:checked::after {
+  background: #40e0d0;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+   -moz-appearance: none;
+}
+progress[value]::-moz-progress-bar { 
+  background-image:
+    -moz-linear-gradient(
+      135deg, 
+      transparent 33%, 
+      rgba(0, 0, 0, 0.1) 33%, 
+      rgba(0, 0, 0, 0.1) 66%, 
+      transparent 66% 
+    ),
+    -moz-linear-gradient(
+      top, 
+      rgba(255, 255, 255, 0.25), 
+      rgba(0, 0, 0, 0.25)
+    ),
+    -moz-linear-gradient(
+      left, 
+      rgb(119, 233, 13), 
+      rgb(22, 175, 22)
+    );
+
+  border-radius: 2px; 
+  background-size: 35px 20px, 100% 100%, 100% 100%; 
+}
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+progress[value]::-webkit-progress-value {
+  background-image:
+     -webkit-linear-gradient(-45deg, 
+                             transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                             rgba(0,0, 0, .1) 66%, transparent 66%),
+     -webkit-linear-gradient(top, 
+                             rgba(255, 255, 255, .25), 
+                             rgba(0, 0, 0, .25)),
+     -webkit-linear-gradient(left, rgb(204, 0, 0), rgb(22, 175, 22));
+
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+@media only screen and (max-width:900px) {
+  img {width: 300px; height: 240px;}
+  progress {width: 100%;}
+  #viewDiv {min-height: 270px; margin: 0 auto;}
+  #wrapper {width:100%;}
+}
+@media only screen and (max-width:700px) {
+  img {width: 100%;}
+  main {margin-left:2%; margin-right: 2%;font-size: 16px;}
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
