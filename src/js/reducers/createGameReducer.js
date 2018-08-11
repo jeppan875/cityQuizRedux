@@ -3,7 +3,8 @@ const initialState = {
     isStarted: false,
     gameType: null,
     score: null
-  }
+  },
+  imgLoaded: 0
 }
 
 export default function (state = initialState, action) {
@@ -12,6 +13,28 @@ export default function (state = initialState, action) {
       return {
         ...state,
         createGame: action.payLoad
+      }
+    case ('LOAD_IMG') :
+      return {
+        ...state,
+        imgLoaded: state.imgLoaded + 1
+      }
+    case ('MAX_IMG') :
+      console.log('reducer maximg')
+      return {
+        ...state,
+        maxImg: action.payLoad
+      }
+    case ('START_GAME') :
+      return {
+        ...state,
+        startGame: true
+      }
+    case ('RESET_GAME') :
+      return {
+        ...state,
+        startGame: false,
+        imgLoaded: 0
       }
     default:
       return state

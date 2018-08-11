@@ -1,5 +1,7 @@
 import fire from '../../fire'
 import * as QuizActions from '../actions/QuizActions'
+import { imgLoaded } from '../actions/createGameAction'
+import store from '../store'
 const citiesLib = require('./lib/cities')
 const helpers = require('./lib/helpers')
 const cities = citiesLib.cities
@@ -106,7 +108,7 @@ class MultiPic {
       arr[0] = img
       paths[0] = path
       urlArr[0] = url
-      QuizActions.imgLoaded()
+      store.dispatch(imgLoaded())
     }).catch(function (error) {
       console.log(error)
     })
@@ -119,7 +121,7 @@ class MultiPic {
         arr[i - 1] = img
         paths[i - 1] = path
         urlArr[i - 1] = url
-        QuizActions.imgLoaded()
+        store.dispatch(imgLoaded())
       }).catch(function (error) {
         console.log(error)
       })

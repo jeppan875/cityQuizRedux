@@ -11,7 +11,6 @@ class QuizGame {
       this.size = size + size * 0.4
       let citiesCount = size
       this.maxPoints = maxPoints
-      console.log('constructtor')
       let cities = this.getCities(citiesCount)
       this.cities = cities
       let skylines = this.getSkyline(size * 0.4)

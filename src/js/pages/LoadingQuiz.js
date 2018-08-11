@@ -1,50 +1,36 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import QuizStore from '../stores/QuizStore'
 import QuizGame from '../game/QuizGame'
-import * as QuizActions from '../actions/QuizActions'
 import { connect } from 'react-redux'
-import { createGame } from '../actions/createGameAction'
+import { startGame, getMaxImg } from '../actions/createGameAction'
+import store from '../store'
 
 class LoadQuiz extends React.Component {
-  constructor () {
-    super()
-    this.imgLoaded = this.imgLoaded.bind(this)
-    this.state = {
-      imgLoadCount: 0,
-      startGame: false
-    }
-  }
   componentWillMount () {
-    QuizStore.on('img-loaded', this.imgLoaded)
     this.imgLoadCount = 0
-    this.maxImg = this.getMaxImgs(this.props.gameType)
+    this.props.getMaxImg(this.getMaxImgs(this.props.gameType))
     this.quizGame = new QuizGame(this.props.gameType, this.props.score || 1000, 1, false)
   }
   componentWillUnmount () {
-    QuizStore.removeListener('img-loaded', this.imgLoaded)
+    console.log(store.getState())
   }
-  imgLoaded () {
-    this.state.imgLoadCount++
-    document.querySelector('progress').value = this.state.imgLoadCount
-    if (this.state.imgLoadCount === this.maxImg) {
-      this.setState({startGame: true})
-      setTimeout(() => {
-        QuizActions.loadedQuiz(this.quizGame)
-      }, 0)
+  componentDidUpdate () {
+    if (this.props.imgLoaded === this.props.maxImg) {
+      this.props.startGame()
     }
   }
+
   getMaxImgs (size) {
     return 3 * size + size * 0.4
   }
   render () {
-    if (this.state.startGame) {
+    if (this.props.startGame) {
       return <Redirect to='/quiz' />
     } else {
       return (
         <div>
           <p>render!</p>
-          <progress max={this.maxImg} />
+          <progress max={this.maxImg} value={this.props.imgLoaded} />
         </div>
       )
     }
@@ -52,7 +38,10 @@ class LoadQuiz extends React.Component {
 }
 const mapStateToProps = state => ({
   gameType: state.createGame.createGame.gameType,
-  score: state.createGame.createGame.score
+  score: state.createGame.createGame.score,
+  imgLoaded: state.createGame.imgLoaded,
+  maxImg: state.createGame.maxImg,
+  startGame: state.createGame.startGame
 })
 
-export default connect(mapStateToProps, { createGame })(LoadQuiz)
+export default connect(mapStateToProps, { startGame, getMaxImg })(LoadQuiz)

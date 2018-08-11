@@ -1,5 +1,7 @@
 import fire from '../../fire'
 import * as QuizActions from '../actions/QuizActions'
+import { imgLoaded } from '../actions/createGameAction'
+import store from '../store'
 const helpers = require('./lib/helpers')
 const storage = fire.storage()
 const skylineLib = require('./lib/skylineLib')
@@ -58,7 +60,7 @@ class Skyline {
       arr[0] = img
       urlArr[0] = url
       paths[0] = arrSkyline[0]
-      QuizActions.imgLoaded()
+      store.dispatch(imgLoaded())
     }).catch(function (error) {
       console.log(error)
     })
