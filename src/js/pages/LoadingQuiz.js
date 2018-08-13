@@ -2,21 +2,30 @@ import React from 'react'
 import { Redirect } from 'react-router'
 import QuizGame from '../game/QuizGame'
 import { connect } from 'react-redux'
-import { startGame, getMaxImg } from '../actions/createGameAction'
+import { startNewGame, getMaxImg } from '../actions/createGameAction'
+import {gameLoaded} from '../actions/gameAction'
 import store from '../store'
 
 class LoadQuiz extends React.Component {
+  constructor () {
+    super()
+    this.game = null
+  }
   componentWillMount () {
-    this.imgLoadCount = 0
     this.props.getMaxImg(this.getMaxImgs(this.props.gameType))
-    this.quizGame = new QuizGame(this.props.gameType, this.props.score || 1000, 1, false)
+    this.game = new QuizGame(this.props.gameType, this.props.score || 1000, 1, false)
   }
   componentWillUnmount () {
+    console.log(this.game)
     console.log(store.getState())
   }
   componentDidUpdate () {
+    console.log(this.props.imgLoaded)
+    console.log(this.props.maxImg)
     if (this.props.imgLoaded === this.props.maxImg) {
-      this.props.startGame()
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+      this.props.gameLoaded(this.game)
+      this.props.startNewGame()
     }
   }
 
@@ -44,4 +53,4 @@ const mapStateToProps = state => ({
   startGame: state.createGame.startGame
 })
 
-export default connect(mapStateToProps, { startGame, getMaxImg })(LoadQuiz)
+export default connect(mapStateToProps, { startNewGame, getMaxImg, gameLoaded })(LoadQuiz)

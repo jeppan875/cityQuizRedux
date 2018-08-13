@@ -2,11 +2,12 @@ import React from 'react'
 import QuizStore from '../../stores/QuizStore'
 import { Redirect } from 'react-router'
 import * as QuizActions from '../../actions/QuizActions'
+import { connect } from 'react-redux'
+import store from '../../store'
 
-export default class Question extends React.Component {
+class Question extends React.Component {
   constructor () {
     super()
-    this.quizLoaded = this.quizLoaded.bind(this)
     this.startGame = this.startGame.bind(this)
     this.sendAnswer = this.sendAnswer.bind(this)
     this.nextPic = this.nextPic.bind(this)
@@ -22,33 +23,25 @@ export default class Question extends React.Component {
     }
     this.interval = null
     this.picCount = null
+    console.log(store.getState())
   }
   componentWillMount () {
-    QuizStore.on('quiz-loaded', this.quizLoaded)
+    console.log(store.getState())
     QuizStore.on('timeup', this.sendAnswer)
     QuizStore.on('nextpic', this.nextPic)
     QuizStore.on('start-game', this.startGame)
   }
+  componentDidMount () {
+    this.startGame()
+  }
   componentWillUnmount () {
-    QuizStore.removeListener('quiz-loaded', this.quizLoaded)
     QuizStore.removeListener('timeup', this.sendAnswer)
     QuizStore.removeListener('nextpic', this.nextPic)
     QuizStore.removeListener('start-game', this.startGame)
   }
-  quizLoaded () {
-    this.game = QuizStore.getQuizGame()
-    setTimeout(() => {
-      QuizActions.startGame()
-    }, 0)
-  }
   startGame () {
     this.startTimer()
     this.picCount = 0
-    this.setState({
-      currentImg: this.game.questions[this.game.currentCount].urlArr[this.picCount],
-      alternatives: this.game.questions[this.game.currentCount].alternatives,
-      question: this.game.questions[this.game.currentCount].getQuestionDesc()
-    })
   }
   endGame () {
     this.stopTimer()
@@ -78,20 +71,19 @@ export default class Question extends React.Component {
     this.picCount = 0
     this.game.currentCount++
     this.stopTimer()
-    if (this.state.score + this.state.timeLeft >= this.game.maxPoints || this.game.currentCount >= this.game.size) {
+    if (this.props.score + this.props.questionArr[this.props.currentCount].time >= this.props.maxPoints || this.props.currentCount >= this.props.size) {
       this.endGame()
     } else {
       this.startTimer()
       this.setState({
-        currentImg: this.game.questions[this.game.currentCount].urlArr[this.picCount],
         alternatives: this.game.questions[this.game.currentCount].alternatives,
         question: this.game.questions[this.game.currentCount].getQuestionDesc()
       })
     }
   }
   startTimer () {
-    let game = this.game
-    let startTime = game.questions[game.currentCount].time
+    console.log(store.getState())
+    let startTime = this.props.questionArr[this.props.currentCount].time
     this.setState({
       startTime: startTime,
       timeLeft: startTime
@@ -129,11 +121,11 @@ export default class Question extends React.Component {
     return (
       <div id='quizDiv' className='container'>
         <div className='card transparent card-position borders slideInFromTop'>
-          <img id='view' className='card-img-top' alt='' src={this.state.currentImg} />
+          <img id='view' className='card-img-top' alt='' src={this.props.questionArr[this.props.currentCount].urlArr[this.picCount]} />
           <p className='top-right score-board' id='spScore'>Score: {this.state.score}</p>
           <div className='card-body'>
-            <h5 className='card-title font-size-16 no-margin'>{this.state.question}</h5>
-            <progress className='no-margin' max={this.state.startTime} value={this.state.timeLeft} />
+            <h5 className='card-title font-size-16 no-margin'>{this.props.questionArr[this.props.currentCount].getQuestionDesc()}</h5>
+            <progress className='no-margin' max={this.props.questionArr[this.props.currentCount].time} value={this.state.timeLeft} />
           </div>
         </div>
         <div className='card transparent card-position borders slideInFromBottom'>
@@ -142,21 +134,21 @@ export default class Question extends React.Component {
               <div>
                 <div className='inline'>
                   <input type='radio' id='q1' className='option-input radio inline' name='answer' value={this.state.alternatives[0]} />
-                  <label htmlFor='q1' id='l1'>{this.state.alternatives[0]}</label>
+                  <label htmlFor='q1' id='l1'>{this.props.questionArr[this.props.currentCount].alternatives[0]}</label>
                 </div>
                 <div className='inline'>
                   <input type='radio' id='q2' className='option-input radio inline' name='answer' value={this.state.alternatives[1]} />
-                  <label htmlFor='q2' id='l2'>{this.state.alternatives[1]}</label>
+                  <label htmlFor='q2' id='l2'>{this.props.questionArr[this.props.currentCount].alternatives[1]}</label>
                 </div>
               </div>
               <div>
                 <div className='inline'>
                   <input type='radio' id='q3' className='option-input radio inline' name='answer' value={this.state.alternatives[2]} />
-                  <label htmlFor='q3' id='l3'>{this.state.alternatives[2]}</label>
+                  <label htmlFor='q3' id='l3'>{this.props.questionArr[this.props.currentCount].alternatives[2]}</label>
                 </div>
                 <div className='inline'>
                   <input type='radio' id='q4' className='option-input radio inline' name='answer' value={this.state.alternatives[3]} />
-                  <label className='label-custom' htmlFor='q4' id='l4'>{this.state.alternatives[3]}</label>
+                  <label className='label-custom' htmlFor='q4' id='l4'>{this.props.questionArr[this.props.currentCount].alternatives[3]}</label>
                 </div>
               </div>
             </div>
@@ -169,3 +161,13 @@ export default class Question extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  questionArr: state.game.game.questions,
+  currentCount: state.game.game.currentCount,
+  score: state.game.game.score,
+  maxPoints: state.game.game.maxPoints,
+  size: state.game.game.size
+})
+
+export default connect(mapStateToProps, {})(Question)

@@ -20,7 +20,6 @@ export default function (state = initialState, action) {
         imgLoaded: state.imgLoaded + 1
       }
     case ('MAX_IMG') :
-      console.log('reducer maximg')
       return {
         ...state,
         maxImg: action.payLoad
