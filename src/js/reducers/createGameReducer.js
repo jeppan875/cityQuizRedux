@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
         ...state,
         startGame: true
       }
-    case ('RESET_GAME') :
+    case ('RESET_LOADED_GAME') :
       return {
         ...state,
         startGame: false,

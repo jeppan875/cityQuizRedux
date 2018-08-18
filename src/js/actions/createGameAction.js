@@ -9,7 +9,7 @@ export function createGame (clickedStart, gameType, score = 10000) {
     })
   }
 }
-export function imgLoaded (imgLoaded = 0) {
+export function imgLoaded () {
   return function (dispatch) {
     dispatch({type: 'LOAD_IMG'
     })
@@ -28,9 +28,9 @@ export function startNewGame () {
     })
   }
 }
-export function resetGame () {
+export function resetLoadedGame () {
   return function (dispatch) {
-    dispatch({type: 'RESET_GAME'
+    dispatch({type: 'RESET_LOADED_GAME'
     })
   }
 }

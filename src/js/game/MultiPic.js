@@ -36,8 +36,8 @@ class MultiPic {
       this.picCount = 3
     }
   }
-  getQuestionDesc () {
-    return `Which is the city? pic ${this.picCount}/3`
+  getQuestionDesc (picCount) {
+    return `Which is the city? pic ${3 - picCount}/3`
   }
   alternatives (rightAnswer) {
     let arr = []

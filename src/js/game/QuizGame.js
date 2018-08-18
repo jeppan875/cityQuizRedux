@@ -15,17 +15,12 @@ class QuizGame {
       this.cities = cities
       let skylines = this.getSkyline(size * 0.4)
       this.skylines = skylines
-      this.currentCount = 0
       this.questions = this.questions(citiesCount, cities, skylines)
-      this.score = 0
-      this.answers = []
       this.playerCount = playerCount
     } else {
       this.maxPoints = maxPoints
       this.playerCount = playerCount
       this.size = size
-      this.currentCount = 0
-      this.answers = []
       this.questions = this.multiplayerJoiner(questionsArr, size)
     }
   }
