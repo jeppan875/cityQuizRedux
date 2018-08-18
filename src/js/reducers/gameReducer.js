@@ -3,7 +3,6 @@ const initialState = {
   currentCount: 0,
   answers: [],
   score: 0,
-  timeLeft: 30,
   picCount: 0,
   gameEnded: false
 }

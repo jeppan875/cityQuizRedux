@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 import QuizGame from '../game/QuizGame'
 import { connect } from 'react-redux'
 import { startNewGame, getMaxImg, resetLoadedGame } from '../actions/createGameAction'
-import {gameLoaded} from '../actions/gameAction'
+import {gameLoaded, resetGame} from '../actions/gameAction'
 
 class LoadQuiz extends React.Component {
   constructor () {
@@ -11,6 +11,7 @@ class LoadQuiz extends React.Component {
     this.game = null
   }
   componentWillMount () {
+    this.props.resetGame()
     this.props.getMaxImg(this.getMaxImgs(this.props.gameType))
     this.game = new QuizGame(this.props.gameType, this.props.score || 1000, 1, false)
   }
@@ -50,4 +51,4 @@ const mapStateToProps = state => ({
   startGame: state.createGame.startGame
 })
 
-export default connect(mapStateToProps, { startNewGame, getMaxImg, gameLoaded, resetLoadedGame })(LoadQuiz)
+export default connect(mapStateToProps, { startNewGame, getMaxImg, gameLoaded, resetLoadedGame, resetGame })(LoadQuiz)
