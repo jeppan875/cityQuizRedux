@@ -54,7 +54,6 @@ class QuizStore extends EventEmitter {
       }
       case 'GAMEID': {
         this.gameId = action.gameId
-        console.log('gameid')
         this.emit('gameid')
         break
       }

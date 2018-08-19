@@ -4,8 +4,10 @@ import JoinGame from '../components/multiplayerMain/JoinGame'
 import * as QuizAction from '../actions/QuizActions'
 import { Redirect } from 'react-router'
 import QuizStore from '../stores/QuizStore'
+import { connect } from 'react-redux'
+import { getGameId } from '../actions/multiplayerAction'
 
-export default class MultiplayerMain extends React.Component {
+class MultiplayerMain extends React.Component {
   constructor () {
     super()
     this.join = this.join.bind(this)
@@ -20,14 +22,12 @@ export default class MultiplayerMain extends React.Component {
     QuizStore.removeListener('gameid', this.join)
   }
   join () {
-    console.log('fhgf')
     this.setState({clickedJoin: true})
   }
   clickJoin (e) {
     e.preventDefault()
     let value = e.target
     QuizAction.gameId(value.answer.value)
-    // console.log(value.answer.value)
   }
   render () {
     if (this.state.clickedJoin) {
@@ -49,3 +49,8 @@ export default class MultiplayerMain extends React.Component {
     )
   }
 }
+const mapStateToProps = state => ({
+  clickedStart: state.createGame.createGame.clickedStart
+})
+
+export default connect(mapStateToProps, { getGameId })(MultiplayerMain)

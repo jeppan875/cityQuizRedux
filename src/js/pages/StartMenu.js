@@ -8,7 +8,6 @@ import CreateGameButton from '../components/multiplayerCreateGame/CreateButton'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { createGame } from '../actions/createGameAction'
-import store from '../store'
 
 class StartMenu extends React.Component {
   constructor () {
@@ -21,10 +20,8 @@ class StartMenu extends React.Component {
   }
   componentWillUnmount () {
     this.props.createGame(false)
-    console.log(store.getState())
   }
   clickStart (e) {
-    console.log(this.props)
     e.preventDefault()
     let value = e.target
     QuizAction.gameType(value.gametype.value)
